@@ -15,6 +15,7 @@ import java.util.List;
 import com.sunbenjin.tank.abstractfactory.BaseExplode;
 import com.sunbenjin.tank.abstractfactory.DefaultFactory;
 import com.sunbenjin.tank.abstractfactory.GameFactory;
+import com.sunbenjin.tank.abstractfactory.RectFactory;
 
 public class TankFrame extends Frame{
 	Tank myTank = new Tank(Dir.DOWN,200,200,this,Group.GOOD);
