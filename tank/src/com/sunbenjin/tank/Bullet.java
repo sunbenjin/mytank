@@ -4,7 +4,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Iterator;
 
-public class Bullet {
+import com.sunbenjin.tank.abstractfactory.BaseBullet;
+import com.sunbenjin.tank.abstractfactory.GameFactory;
+
+public class Bullet extends BaseBullet{
 
 	private static final int SPEED = 20;
 	private int x, y;
@@ -121,9 +124,11 @@ public class Bullet {
 		if(rect.intersects(tank.rect)) {
 			this.die();
 			tank.die();
-			int eX = tank.getX()+Tank.WIDTH/2-Explose.WIDTH/2;
-			int eY = tank.getY()+Tank.HEIGHT/2-Explose.HEIGHT/2;
-			tf.exploses.add(new Explose(eX,eY,tf));
+			int eX = tank.getX()+Tank.WIDTH/2-Explode.WIDTH/2;
+			int eY = tank.getY()+Tank.HEIGHT/2-Explode.HEIGHT/2;
+			
+			
+			tf.exploses.add(tf.gf.createExplode(eX, eY, tf));
 			
 		}
 		

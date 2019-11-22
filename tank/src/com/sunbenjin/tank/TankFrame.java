@@ -12,14 +12,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.sunbenjin.tank.abstractfactory.BaseExplode;
+import com.sunbenjin.tank.abstractfactory.DefaultFactory;
+import com.sunbenjin.tank.abstractfactory.GameFactory;
+
 public class TankFrame extends Frame{
 	Tank myTank = new Tank(Dir.DOWN,200,200,this,Group.GOOD);
 	//Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> tanks = new ArrayList<>();
-	List<Explose> exploses = new ArrayList<>();
+	List<BaseExplode> exploses = new ArrayList<>();
 	static int GAME_WIDTH = 1000,GAME_HEIGHT = 1000;
-	Explose e = new Explose(100, 100, this);
+	Explode e = new Explode(100, 100, this);
+	//GameFactory gf = new DefaultFactory();
+	
+	GameFactory gf = new RectFactory();
 	public TankFrame() {
 		
 		this.setSize(GAME_WIDTH, GAME_HEIGHT);

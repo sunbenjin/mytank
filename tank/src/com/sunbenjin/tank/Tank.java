@@ -5,7 +5,9 @@ import java.awt.Rectangle;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Tank {
+import com.sunbenjin.tank.abstractfactory.BaseTank;
+
+public class Tank extends BaseTank{
 	Dir dir = Dir.DOWN;
 	 int x;
 	 int y;
@@ -19,7 +21,7 @@ public class Tank {
 	private Random random = new Random();
 	public Rectangle rect = new Rectangle();
 	//FireStrategy fs = new DefaultFireStrategy();
-	FireStrategy fs = new FourDirFireStrategy();
+	FireStrategy fs ;
 	public Dir getDir() {
 		return dir;
 	}
@@ -46,6 +48,37 @@ public class Tank {
 		rect.y = this.y;
 		rect.height = HEIGHT;
 		rect.width = WIDTH;
+		if(this.group==Group.BAD) {
+			String badFS = (String)ConfigMgr.get("badFS");
+			try {
+				fs = (DefaultFireStrategy)Class.forName(badFS).newInstance();
+			} catch (InstantiationException e) {
+				
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+		
+		}else {
+			String badFS = (String)ConfigMgr.get("goodFS");
+			try {
+				fs = (FourDirFireStrategy)Class.forName(badFS).newInstance();
+			} catch (InstantiationException e) {
+				
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+		
+		}
 		
 	}
 	public void setY(int y) {
