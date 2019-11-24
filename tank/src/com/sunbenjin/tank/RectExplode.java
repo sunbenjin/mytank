@@ -14,16 +14,16 @@ public class RectExplode extends BaseExplode{
 	
 	private boolean living  = true;
 	
-	TankFrame tf = null;
+	GameModel gm = null;
 
 	private int step = 0;
 	
 	
-	public RectExplode(int x, int y,TankFrame tf) {
+	public RectExplode(int x, int y,GameModel gm) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.tf = tf;
+		this.gm = gm;
 		new Thread(()->{
 			new Audio("audio/explode.wav").play();
 		}) .start();
@@ -37,7 +37,7 @@ public class RectExplode extends BaseExplode{
 		g.fillRect(x, y, 10*step, 10*step);
 		step++;
 		if(step>=10) {
-			tf.exploses.remove(this);
+			gm.exploses.remove(this);
 		}
 		g.setColor(c);
 	}

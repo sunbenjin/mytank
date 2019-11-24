@@ -13,7 +13,7 @@ public class Tank extends BaseTank{
 	 int y;
 	private boolean moving = true;
 	private final static int SPEED = 10;
-    TankFrame tf;
+    //TankFrame tf;
 	public static final int WIDTH = ResourceMgr.badTankD.getWidth();
 	public static final int  HEIGHT = ResourceMgr.badTankD.getHeight();
 	private boolean living = true;
@@ -22,6 +22,7 @@ public class Tank extends BaseTank{
 	public Rectangle rect = new Rectangle();
 	//FireStrategy fs = new DefaultFireStrategy();
 	FireStrategy fs ;
+	GameModel gm;
 	public Dir getDir() {
 		return dir;
 	}
@@ -37,12 +38,12 @@ public class Tank extends BaseTank{
 	public int getY() {
 		return y;
 	}
-	public Tank(Dir dir, int x, int y, TankFrame tf,Group group) {
+	public Tank(Dir dir, int x, int y, GameModel gm,Group group) {
 		super();
 		this.dir = dir;
 		this.x = x;
 		this.y = y;
-		this.tf = tf;
+		this.gm = gm;
 		this.group = group;
 		rect.x = this.x;
 		rect.y = this.y;
@@ -91,7 +92,7 @@ public class Tank extends BaseTank{
 		g.fillRect(x, y, 50, 50);
 		g.setColor(c);*/
 		//if(!living) tf.tanks.remove(this);
-		for(Iterator<Tank> it = tf.tanks.iterator(); it.hasNext();) {
+		for(Iterator<Tank> it = gm.tanks.iterator(); it.hasNext();) {
 			Tank tank = it.next();
 			if(!tank.living) {
 				it.remove();

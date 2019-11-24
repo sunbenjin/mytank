@@ -18,16 +18,13 @@ import com.sunbenjin.tank.abstractfactory.GameFactory;
 import com.sunbenjin.tank.abstractfactory.RectFactory;
 
 public class TankFrame extends Frame{
-	Tank myTank = new Tank(Dir.DOWN,200,200,this,Group.GOOD);
-	//Bullet bullet = new Bullet(300, 300, Dir.DOWN);
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank> tanks = new ArrayList<>();
-	List<BaseExplode> exploses = new ArrayList<>();
+	GameModel gm  = new GameModel();
+
 	static int GAME_WIDTH = 1000,GAME_HEIGHT = 1000;
-	Explode e = new Explode(100, 100, this);
-	//GameFactory gf = new DefaultFactory();
+	//Explode e = new Explode(100, 100, this);
+	GameFactory gf = new DefaultFactory();
 	
-	GameFactory gf = new RectFactory();
+	//GameFactory gf = new RectFactory();
 	public TankFrame() {
 		
 		this.setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -50,37 +47,8 @@ public class TankFrame extends Frame{
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.WHITE);
-		g.drawString("子弹的数量共有："+bullets.size(), 10, 50);
-		g.drawString("敌人的数量共有："+tanks.size(), 10, 80);
-		g.drawString("爆炸的数量共有："+exploses.size(), 10, 110);
-		g.setColor(c);
-		myTank.paint(g);
-		/*for(Bullet bullet: bullets) {
-			bullet.paint(g);
-		}*/
-		for(int i = 0; i<bullets.size(); i++) {
-			bullets.get(i).paint(g);
-		}
-	/*	for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
-			Bullet b = it.next();
-			if(!b.live) {
-				it.remove();
-			}
-		}*/
-		// TODO Auto-generated method stub
-		for(int i =0 ; i<tanks.size(); i++) {
-			tanks.get(i).paint(g);
-		}
-		for(int i =0 ; i<exploses.size(); i++) {
-			exploses.get(i).paint(g);
-		}
-		for(int i=0; i<bullets.size(); i++) {
-			for(int j=0; j<tanks.size(); j++) {
-				bullets.get(i).collide(tanks.get(j));
-			}
-		}
+		gm.paint(g);
+	
 		
 	}
 	/**
@@ -149,7 +117,7 @@ public class TankFrame extends Frame{
 					bR = false;
 					break;
 				case KeyEvent.VK_CONTROL:
-					myTank.fire();
+					gm.getMainTank().fire();
 					break;
 				default:
 					break;
@@ -159,6 +127,7 @@ public class TankFrame extends Frame{
 		}
 
 		private void setMainTankDir() {
+			Tank myTank = gm.getMainTank();
 			if(!bL && !bR && !bD && !bU) {
 				myTank.setMoving(false);
 			}else {
@@ -173,7 +142,7 @@ public class TankFrame extends Frame{
 		}
 		
 	}
-	public Tank getMyTank() {
+/*	public Tank getMyTank() {
 		return myTank;
 	}
 
@@ -195,6 +164,6 @@ public class TankFrame extends Frame{
 
 	public void setTanks(List<Tank> tanks) {
 		this.tanks = tanks;
-	}
+	}*/
 
 }
